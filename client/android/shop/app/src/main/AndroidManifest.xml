@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Shop">
+        <activity android:name=".login.NewUserActivity"></activity>
+        <activity android:name=".login.FindPasswordActivity" />
+        <activity android:name=".login.PhoneLoginActivity" />
+        <activity android:name=".login.PrivacyProtectActivity" />
+        <activity android:name=".login.ServiceProtocolActivity" />
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

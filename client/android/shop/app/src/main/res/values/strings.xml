@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">shop</string>
+    <string name="privacy_tip">已阅读并同意服务协议和隐私保护指引</string>
+    <string name="service_protocol_content">服务协议</string>
+    <string name="privacy_protect_content">隐私保护指引</string>
+    <string name="login_text">登录</string>
+    <string name="phone_login">手机号登录</string>
+    <string name="find_password">找回密码</string>
+    <string name="new_user">新用户登录</string>
+    <string name="user_portrait">用户头像</string>
+    <string name="userId_hint">请输入用户名</string>
+    <string name="userPassword_hint">请输入密码</string>
 </resources>
