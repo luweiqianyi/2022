@@ -5,7 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.happy.shop.MainActivity;
 import com.happy.shop.R;
+import com.happy.shop.util.Utils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
     void initialization(){
         initStartOtherActivity();
+        initLoginBtnClickEvent();
     }
 
     void initStartOtherActivity(){
@@ -42,7 +50,35 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void initLoginBtnClickEvent(){
+        Button btn = findViewById(R.id.loginbtn);
+        EditText v1 = findViewById(R.id.userId);
+        EditText v2 = findViewById(R.id.userPassword);
 
+        final String userId = (v1==null)?"":v1.getText().toString();
+        final String userPassword = (v2==null)?"":v2.getText().toString();
+
+        if(btn != null){
+            btn.setOnClickListener(v -> {
+
+                if(!Utils.allowBtnClickAgain()){
+                    return;
+                }
+
+                boolean bSuccess = ((LoginRepository)LoginRepository.getInstance()).login(userId,userPassword);
+
+                if(bSuccess){
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    ((Utils)Utils.getInstance()).showToastTip(
+                            getApplicationContext(),
+                            "登录失败",
+                            Toast.LENGTH_SHORT,
+                            true);
+                }
+            });
+        }
     }
 
 }

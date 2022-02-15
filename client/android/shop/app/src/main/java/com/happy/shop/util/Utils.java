@@ -3,6 +3,8 @@ package com.happy.shop.util;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
@@ -60,5 +62,54 @@ public class Utils extends SingleTon {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    /**
+     * 显示提示
+     * @param context Activity
+     * @param charSequence 提示信息文字
+     * @param duration 提示持续时间
+     * @param bNeedCenter 是否需要居中显示
+     */
+    public void showToastTip(Context context,CharSequence charSequence,int duration,boolean bNeedCenter){
+        Toast toast = Toast.makeText(context, charSequence, duration);
+        if(bNeedCenter){
+            toast.setGravity(Gravity.CENTER, 0, 0);
+        }
+        toast.show();
+    }
+
+    static long s_StartTime = System.nanoTime()/1000/1000;
+
+    static public long timeGetTime64()
+    {
+        long longTime = System.nanoTime()/1000/1000;
+        long intTime = (long) (longTime - s_StartTime);
+        return intTime;
+    }
+
+    static public int timeGetTime()
+    {
+        return (int)timeGetTime64();
+    }
+
+    //实现类似Windows下timeGetTime的功能，但是并不是从开机时间开始算，而是从 变量初始化开始算的
+    static public int getTickCount()
+    {
+        return timeGetTime();
+    }
+
+    private static int mLastClickTick = 0;
+    static public boolean allowBtnClickAgain(){
+        boolean allowed = true;
+        int now = Utils.getTickCount();
+        if(now - mLastClickTick < 1000)
+        {
+            allowed = false;
+        }
+        else {
+            mLastClickTick = now;
+        }
+        return allowed;
     }
 }

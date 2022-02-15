@@ -7,6 +7,7 @@ import com.happy.shop.util.Utils;
 
 /**
  * 双重检查锁单例单元测试
+ * 创建多个线程，检查Utils对象的创建是否只执行了一次
  */
 public class SingleTonTest {
     @Test
