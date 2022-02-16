@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class ResultDescription {
-    enum ResultCode{
+    public enum ResultCode{
         LOGIN_SUCCESS(100),
         LOGIN_FAIL(101);
 
