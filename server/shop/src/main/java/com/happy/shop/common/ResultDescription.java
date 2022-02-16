@@ -20,7 +20,7 @@ public class ResultDescription {
      */
     @Getter
     @Setter
-    private ResultCode code;
+    private int code;
 
     /**
      * 描述信息
@@ -31,7 +31,7 @@ public class ResultDescription {
 
     public ResultDescription(){}
 
-    public ResultDescription(ResultCode code,String description){
+    public ResultDescription(int code,String description){
         this.code = code;
         this.description = description;
     }

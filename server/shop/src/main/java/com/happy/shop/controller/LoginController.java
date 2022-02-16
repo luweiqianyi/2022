@@ -25,7 +25,7 @@ public class LoginController {
      * @param userPwd 用户密码，和客户端协商好的请求参数名字
      * @return Springboot框架默认的json数据返回格式，形如
      * {
-     *     "code": "LOGIN_SUCCESS",
+     *     "code": 100,
      *     "description": "用户登录成功"
      * } 注意：此时http返回的是200
      * 若客户端请求时请求参数写错，比如将userPwd写成userPassword，服务器是不认识的，会返回以下报错结果
@@ -42,12 +42,12 @@ public class LoginController {
         ResultDescription resultDescription;
         if(bLoginSuccess){
             resultDescription = new ResultDescription(
-                    ResultDescription.ResultCode.LOGIN_SUCCESS,
+                    ResultDescription.ResultCode.LOGIN_SUCCESS.getCode(),
                     "用户登录成功");
         }
         else {
             resultDescription = new ResultDescription(
-                    ResultDescription.ResultCode.LOGIN_FAIL,
+                    ResultDescription.ResultCode.LOGIN_FAIL.getCode(),
                     "用户登录失败");
         }
         return resultDescription;
