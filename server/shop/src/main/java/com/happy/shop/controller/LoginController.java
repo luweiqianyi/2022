@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    @Autowired
     LoginService loginService;
 
+    @Autowired
+    LoginController(LoginService service){
+        this.loginService = service;
+    }
     /**
      * post方式的登录请求，请求路径形如：http://127.0.0.1:8082/shop/login
      * userId=nicklaus  userPwd=666888
@@ -36,7 +39,7 @@ public class LoginController {
     @PostMapping("login")
     public ResultDescription login(@RequestParam String userId,@RequestParam String userPwd){
         boolean bLoginSuccess = loginService.login(userId,userPwd);
-        ResultDescription resultDescription = null;
+        ResultDescription resultDescription;
         if(bLoginSuccess){
             resultDescription = new ResultDescription(
                     ResultDescription.ResultCode.LOGIN_SUCCESS,
@@ -47,7 +50,6 @@ public class LoginController {
                     ResultDescription.ResultCode.LOGIN_FAIL,
                     "用户登录失败");
         }
-
         return resultDescription;
     }
 }
