@@ -50,6 +50,7 @@ public class LoginNet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // 有问题：登录失败返回码也是200，应该根据json信息来判断是否登录成功
         return response.code() == 200?true:false;
     }
 }
