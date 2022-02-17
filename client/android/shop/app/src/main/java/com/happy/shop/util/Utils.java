@@ -8,12 +8,24 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
-import com.happy.shop.designpattern.SingleTon;
+public class Utils {
 
-public class Utils extends SingleTon {
+    private static volatile Utils mInstance;
+
     private Utils(){
-        super();
     }
+
+    public static Utils getInstance(){
+        if(mInstance == null){
+            synchronized (Utils.class){
+                if(mInstance == null){
+                    mInstance = new Utils();
+                }
+            }
+        }
+        return mInstance;
+    }
+
 
     /**
      * 外部的类需要实现该接口中的方法以便于实现点击OK或者cancel所产生的行为

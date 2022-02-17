@@ -1,9 +1,8 @@
 package com.happy.shop;
 
-import org.junit.Test;
-
-import com.happy.shop.designpattern.SingleTon;
 import com.happy.shop.util.Utils;
+
+import org.junit.Test;
 
 /**
  * 双重检查锁单例单元测试
@@ -14,7 +13,7 @@ public class SingleTonTest {
     public void isSameInstance(){
         final int length = 50;
         Thread[] threads = new Thread[length];
-        SingleTon[] singleTons = new SingleTon[length];
+        Utils[] singleTons = new Utils[length];
         for(int i=0; i<threads.length;i++){
             final int index = i;
             Thread t = new Thread(() -> {
@@ -34,7 +33,7 @@ public class SingleTonTest {
             }
         }// join(): Waits for this thread to die.
 
-        SingleTon singleTon = singleTons[0];
+        Utils singleTon = singleTons[0];
         int i = 1;
         boolean bSame = true;
         while (i<singleTons.length){
