@@ -51,11 +51,6 @@ public class LoginActivity extends AppCompatActivity {
 
     void initLoginBtnClickEvent(){
         Button btn = findViewById(R.id.loginbtn);
-        EditText v1 = findViewById(R.id.userId);
-        EditText v2 = findViewById(R.id.userPassword);
-
-        final String userId = (v1==null)?"":v1.getText().toString();
-        final String userPassword = (v2==null)?"":v2.getText().toString();
 
         if(btn != null){
             btn.setOnClickListener(v -> {
@@ -64,15 +59,21 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                boolean bSuccess = ((LoginRepository)LoginRepository.getInstance()).login(userId,userPassword);
+                EditText v1 = findViewById(R.id.userId);
+                EditText v2 = findViewById(R.id.userPassword);
+
+                String userId = (v1==null)?"":v1.getText().toString();
+                String userPassword = (v2==null)?"":v2.getText().toString();
+
+                boolean bSuccess = LoginRepository.getInstance().login(userId,userPassword);
 
                 if(bSuccess){
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
                 else{
-                    ((Utils)Utils.getInstance()).showToastTip(
-                            getApplicationContext(),
+                    Utils.getInstance().showToastTip(
+                            LoginActivity.this,//getApplicationContext(),
                             "登录失败",
                             Toast.LENGTH_SHORT,
                             true);

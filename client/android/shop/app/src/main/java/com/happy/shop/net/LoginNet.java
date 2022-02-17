@@ -50,7 +50,26 @@ public class LoginNet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        boolean bSuccess;
+        if(response == null){
+            bSuccess = false;
+        }
+        else{
+            if(response.code() == 200){
+//                if(解析json获取的状态码为登录成功的状态码，需要和服务器开发人员协商){
+//
+//                }
+//                else{
+//
+//                }
+                bSuccess = true; // 暂时将返回200作为登录成功
+            }
+            else {
+                bSuccess = false;
+            }
+        }
         // 有问题：登录失败返回码也是200，应该根据json信息来判断是否登录成功
-        return response.code() == 200?true:false;
+        return bSuccess;
     }
 }
