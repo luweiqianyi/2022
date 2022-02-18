@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.Gravity;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Utils {
 
@@ -112,6 +114,11 @@ public class Utils {
     }
 
     private static int mLastClickTick = 0;
+
+    /**
+     * 控制按钮是否允许重复点击
+     * @return
+     */
     static public boolean allowBtnClickAgain(){
         boolean allowed = true;
         int now = Utils.getTickCount();
@@ -123,5 +130,23 @@ public class Utils {
             mLastClickTick = now;
         }
         return allowed;
+    }
+
+    /**
+     * 显示还是隐藏软键盘
+     * @param activity 当前弹软键盘所在的Activity
+     * @param bShow true: 显示，false: 隐藏
+     */
+    public void showOrHideSoftKeyboard(AppCompatActivity activity,boolean bShow){
+        if(activity != null){
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            if(bShow){
+                imm.showSoftInput(activity.getWindow().getDecorView(),InputMethodManager.SHOW_FORCED); // 强制显示软键盘
+            }
+            else {
+                imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0); //强制隐藏键盘
+            }
+        }
     }
 }

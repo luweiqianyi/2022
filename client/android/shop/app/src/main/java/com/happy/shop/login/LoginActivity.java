@@ -1,13 +1,13 @@
 package com.happy.shop.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.happy.shop.MainActivity;
 import com.happy.shop.R;
@@ -58,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                 if(!Utils.allowBtnClickAgain()){
                     return;
                 }
+
+                Utils.getInstance().showOrHideSoftKeyboard(this,false);
 
                 EditText v1 = findViewById(R.id.userId);
                 EditText v2 = findViewById(R.id.userPassword);
