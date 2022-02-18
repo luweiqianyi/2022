@@ -26,7 +26,7 @@ public class LoginRepository {
 //        }
 //        return false;
 
-        LoginNet loginNet = new LoginNet("http://127.0.0.1:8082");
+        LoginNet loginNet = new LoginNet("http://192.168.36.122:8082");
         return loginNet.login(userId,userPassword);
     }
 }
