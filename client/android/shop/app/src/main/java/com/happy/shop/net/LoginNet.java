@@ -43,20 +43,33 @@ public class LoginNet {
                 .post(formBody)
                 .build();
 
-        Response response = null;
+        final Response[] response = {null};
+        Call call = client.newCall(request);
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    response[0] = call.execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
+
         try {
-            Call call = client.newCall(request);
-            response = call.execute();
-        } catch (IOException e) {
+            t.join();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         boolean bSuccess;
-        if(response == null){
+        if(response[0] == null){
             bSuccess = false;
         }
         else{
-            if(response.code() == 200){
+            if(response[0].code() == 200){
 //                if(解析json获取的状态码为登录成功的状态码，需要和服务器开发人员协商){
 //
 //                }
