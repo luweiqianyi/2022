@@ -20,12 +20,14 @@ public class LoginRepository {
         return mInstance;
     }
 
+    /**
+     * 用户登录功能
+     * @param userId 登录时用户的唯一ID
+     * @param userPassword 用户密码
+     * @return
+     */
+    // TODO 待提升: 1.https的登录处理 2.密码加密处理
     public boolean login(String userId,String userPassword){
-//        if("Zhangsan".equals(userId) && "888666".equals(userPassword)){
-//            return true;
-//        }
-//        return false;
-
         LoginNet loginNet = new LoginNet("http://192.168.36.122:8082/shop/login");
         return loginNet.login(userId,userPassword);
     }
